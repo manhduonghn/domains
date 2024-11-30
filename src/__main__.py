@@ -26,8 +26,7 @@ def create_rules_json():
             "priority": 1,
             "action": {"type": "block"},
             "condition": {
-                "urlFilter": domain,
-                "resourceTypes": ["script", "image", "xmlhttprequest"]
+                "urlFilter": domain
             }
         }
         dynamic_rules.append(rule)
