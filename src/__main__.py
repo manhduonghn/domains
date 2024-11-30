@@ -16,7 +16,6 @@ def get_file_hash(file_path):
         return None
 
 def create_rules_json():
-    """Tạo file rules.json từ các tên miền lấy được từ DomainConverter"""
     domain_converter = DomainConverter()
     domains = domain_converter.process_urls()
     
@@ -51,14 +50,17 @@ def create_rules_json():
 
 def commit_and_push(file_path):
     try:
+        subprocess.run(["git", "config", "--global", "user.name", "github-actions"], check=True)
+        subprocess.run(["git", "config", "--global", "user.email", "actions@github.com"], check=True)
+
         status_result = subprocess.run(["git", "status", "--porcelain"], capture_output=True, text=True)
         status_output = status_result.stdout.strip()
         
         if status_output:
             info(f"Đã thay đổi file {file_path}. Tiến hành commit và push.")
-            subprocess.run(["git", "add", file_path], check=True)  # Thêm file vào staging
-            subprocess.run(["git", "commit", "-m", f"Update {file_path}"], check=True)  # Commit
-            subprocess.run(["git", "push"], check=True)  # Push thay đổi lên remote repository
+            subprocess.run(["git", "add", file_path], check=True)
+            subprocess.run(["git", "commit", "-m", f"Update {file_path}"], check=True)
+            subprocess.run(["git", "push"], check=True)
         else:
             silent_error(f"Không có thay đổi trong {file_path}. Không cần commit.")
     
