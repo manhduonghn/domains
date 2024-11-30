@@ -1,4 +1,4 @@
-name: Download, Convert, and Commit Domains
+name: Domains
 
 on:
   push:
@@ -16,8 +16,8 @@ jobs:
         uses: actions/checkout@main
 
       # Chạy script để tải và chuyển đổi
-      - name: Run download and convert script
-        run: bash convert.sh
+      - name: Convert Domains
+        run: python -m src
         
       # Commit và push file domains.txt vào repository
       - name: Commit customrules.txt
