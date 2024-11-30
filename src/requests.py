@@ -1,14 +1,7 @@
-import ssl
-import gzip
-import json
 import time
 import random
 import http.client
-import socket
-import zlib
-from io import BytesIO
 from functools import wraps
-from typing import Optional, Tuple
 from src import info, silent_error, error
 
 
@@ -73,24 +66,3 @@ retry_config = {
         f"Sleeping before next retry ({retry_state['attempt_number']})"
     )
 }
-
-class RateLimiter:
-    def __init__(self, interval: float = 1):
-        self.interval = interval
-        self.timestamp = time.time()
-
-    def wait_for_next_request(self):
-        now = time.time()
-        elapsed = now - self.timestamp
-        sleep_time = max(0, self.interval - elapsed)
-        if sleep_time > 0:
-            time.sleep(sleep_time)
-        self.timestamp = time.time()
-
-def rate_limited_request(func):
-    @wraps(func)
-    def wrapper(*args, **kwargs):
-        rate_limiter = RateLimiter()
-        rate_limiter.wait_for_next_request()
-        return func(*args, **kwargs)
-    return wrapper
