@@ -1,0 +1,31 @@
+name: Download, Convert, and Commit Domains
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:  # Cho phép kích hoạt thủ công từ giao diện GitHub
+
+jobs:
+  download_and_commit:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Check out mã nguồn repository
+      - name: Checkout code
+        uses: actions/checkout@main
+
+      # Chạy script để tải và chuyển đổi
+      - name: Run download and convert script
+        run: bash convert.sh
+        
+      # Commit và push file domains.txt vào repository
+      - name: Commit domains.txt
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "actions@github.com"
+          git add domains.txt
+          git commit -m "Update customrules.txt"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
