@@ -1,6 +1,6 @@
 import os
 from src import info
-from src.domain import DomainConverter
+from src.domains import DomainConverter
 
 def create_customrules():
     domain_converter = DomainConverter()
