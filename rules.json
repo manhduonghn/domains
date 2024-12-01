@@ -124688,5 +124688,205 @@
         "condition": {
             "urlFilter": "zzelicawwofl.com"
         }
+    },
+    {
+        "id": 12470,
+        "priority": 1,
+        "action": {
+            "type": "modifyHeaders",
+            "requestHeaders": [
+                {
+                    "header": "Cache-Control",
+                    "operation": "set",
+                    "value": "no-store"
+                },
+                {
+                    "header": "Pragma",
+                    "operation": "set",
+                    "value": "no-cache"
+                },
+                {
+                    "header": "Expires",
+                    "operation": "set",
+                    "value": "0"
+                }
+            ]
+        },
+        "condition": {
+            "urlFilter": ".*\\.html$",
+            "resourceTypes": [
+                "main_frame",
+                "sub_frame"
+            ]
+        }
+    },
+    {
+        "id": 12471,
+        "priority": 1,
+        "action": {
+            "type": "block"
+        },
+        "condition": {
+            "urlFilter": "/v/*/vast.js",
+            "resourceTypes": [
+                "script"
+            ],
+            "excludedDomains": [
+                "cdn2.kenhvn2.com"
+            ]
+        }
+    },
+    {
+        "id": 12472,
+        "priority": 1,
+        "action": {
+            "type": "block"
+        },
+        "condition": {
+            "urlFilter": "/ads/popup",
+            "resourceTypes": [
+                "script"
+            ]
+        }
+    },
+    {
+        "id": 12473,
+        "priority": 1,
+        "action": {
+            "type": "block"
+        },
+        "condition": {
+            "urlFilter": "/ads/*.gif",
+            "resourceTypes": [
+                "image"
+            ]
+        }
+    },
+    {
+        "id": 12474,
+        "priority": 1,
+        "action": {
+            "type": "block"
+        },
+        "condition": {
+            "urlFilter": "/newchill/*gif",
+            "resourceTypes": [
+                "image"
+            ]
+        }
+    },
+    {
+        "id": 12475,
+        "priority": 1,
+        "action": {
+            "type": "block"
+        },
+        "condition": {
+            "urlFilter": "/newchill/",
+            "resourceTypes": [
+                "script"
+            ]
+        }
+    },
+    {
+        "id": 12476,
+        "priority": 1,
+        "action": {
+            "type": "block"
+        },
+        "condition": {
+            "regexFilter": "^https:\\/\\/[a-z-]{6,15}\\.(?:com|net|tv|xyz)\\/(?:40[01]|50?0?)\\/\\d{6,7}\\??\\S*$",
+            "resourceTypes": [
+                "script",
+                "xmlhttprequest"
+            ],
+            "domainType": "thirdParty"
+        }
+    },
+    {
+        "id": 12477,
+        "priority": 1,
+        "action": {
+            "type": "block"
+        },
+        "condition": {
+            "urlFilter": "/?oo=1&aab=1|",
+            "resourceTypes": [
+                "script",
+                "xmlhttprequest"
+            ],
+            "domainType": "thirdParty"
+        }
+    },
+    {
+        "id": 12478,
+        "priority": 1,
+        "action": {
+            "type": "block"
+        },
+        "condition": {
+            "regexFilter": "^https:\\/\\/[a-z]{8,15}\\.(?:com|net)\\/(?:\\d{1,3}\\/)?tag\\.min\\.js$",
+            "resourceTypes": [
+                "script"
+            ],
+            "domainType": "thirdParty"
+        }
+    },
+    {
+        "id": 12479,
+        "priority": 1,
+        "action": {
+            "type": "block"
+        },
+        "condition": {
+            "urlFilter": "||i.imgur.com^*.gif",
+            "resourceTypes": [
+                "image"
+            ],
+            "domainType": "thirdParty",
+            "includedDomains": [
+                "ghienphim.io",
+                "mv.dailyphimz.com",
+                "mv.phimmoiaz.cc",
+                "phimgichill.net",
+                "mythethao.net",
+                "xemtivi4k.com",
+                "vtipster.net",
+                "huphimtv.com",
+                "phimmoi.club",
+                "xemtivi.tvhayhd.tv",
+                "hoathinh4k3.net",
+                "vutruphim.tv",
+                "ketqua247vn.club"
+            ]
+        }
+    },
+    {
+        "id": 12480,
+        "priority": 1,
+        "action": {
+            "type": "block"
+        },
+        "condition": {
+            "urlFilter": "/728-90.",
+            "resourceTypes": [
+                "image"
+            ],
+            "domainType": "thirdParty",
+            "matchCase": true
+        }
+    },
+    {
+        "id": 12481,
+        "priority": 1,
+        "action": {
+            "type": "block"
+        },
+        "condition": {
+            "regexFilter": "^https:\\/\\/cdn\\.lfastcdn\\.com\\/\\d{4}\\/\\d{1,2}\\/[^\\/]+\\.gif$",
+            "resourceTypes": [
+                "image"
+            ]
+        }
     }
 ]
