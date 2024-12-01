@@ -45,7 +45,7 @@ def create_rules_json():
     
     info(f"Đã tạo file {output_file} với {len(domains)} tên miền.")
     
-    # Now merge with custom rules
+    # Merge with custom rules and create a final combined file
     merge_custom_rules(output_file)
     commit_and_push(output_file)
 
@@ -69,7 +69,7 @@ def merge_custom_rules(rules_file):
     # Save the updated rules back to the JSON file
     save_json(rules_file, existing_rules)
 
-    info(f"Successfully merged {len(custom_rules)} custom rules into {rules_file}.")
+    info(f"Đã kết hợp {len(custom_rules)} custom rules vào {rules_file}.")
 
 def load_json(file_path):
     """Load JSON data from a file."""
