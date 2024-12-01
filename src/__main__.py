@@ -31,32 +31,33 @@ def create_rules_json():
         }
         dynamic_rules.append(rule)
     
-    output_file = "rules.json"
-    old_hash = get_file_hash(output_file)
+    temp_output_file = "temp_rules.json"
+    old_hash = get_file_hash(temp_output_file)
     
-    with open(output_file, "w") as file:
+    # Save the generated rules into temp_rules.json first
+    with open(temp_output_file, "w") as file:
         json.dump(dynamic_rules, file, indent=4)
     
-    new_hash = get_file_hash(output_file)
+    new_hash = get_file_hash(temp_output_file)
     
     if old_hash == new_hash:
-        silent_error("Không có thay đổi nào trong rules.json. Không commit.")
+        silent_error("Không có thay đổi nào trong temp_rules.json. Không commit.")
         return
     
-    info(f"Đã tạo file {output_file} với {len(domains)} tên miền.")
+    info(f"Đã tạo file {temp_output_file} với {len(domains)} tên miền.")
     
-    # Merge with custom rules and create a final combined file
-    merge_custom_rules(output_file)
-    commit_and_push(output_file)
+    # Merge with custom rules and create a final rules.json
+    merge_custom_rules(temp_output_file)
+    commit_and_push("rules.json")
 
-def merge_custom_rules(rules_file):
+def merge_custom_rules(temp_rules_file):
     custom_rules_file = "custom_rules.json"
     
-    # Load existing rules and custom rules
-    existing_rules = load_json(rules_file)
+    # Load existing rules from temp_rules.json
+    existing_rules = load_json(temp_rules_file)
     custom_rules = load_json(custom_rules_file)
 
-    # Find the last ID in existing rules (rules.json)
+    # Find the last ID in existing rules (temp_rules.json)
     max_existing_id = max((rule['id'] for rule in existing_rules), default=0)
     
     # Update custom rule IDs to continue from the highest existing ID
@@ -66,10 +67,10 @@ def merge_custom_rules(rules_file):
     # Append custom rules to existing rules
     existing_rules.extend(custom_rules)
     
-    # Save the updated rules back to the JSON file
-    save_json(rules_file, existing_rules)
+    # Save the final combined rules to rules.json
+    save_json("rules.json", existing_rules)
 
-    info(f"Đã kết hợp {len(custom_rules)} custom rules vào {rules_file}.")
+    info(f"Đã kết hợp {len(custom_rules)} custom rules vào rules.json.")
 
 def load_json(file_path):
     """Load JSON data from a file."""
